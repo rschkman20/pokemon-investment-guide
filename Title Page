@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pokémon Card Investment Guide</title>
+</head>
+<body>
+  <h1>Pokémon Card Investment Guide</h1>
+  <p>Welcome to the ultimate resource for investing in Pokémon cards.</p>
+
+  <h2>Top Investment Tips</h2>
+  <ul>
+    <li>Buy PSA-graded cards — grade 9 or 10.</li>
+    <li>Focus on vintage cards (Base Set, Neo Genesis).</li>
+    <li>Track modern alt-art hype (like Charizard, Umbreon).</li>
+  </ul>
+
+  <footer>
+    <p>Created by Ryan Schokman</p>
+  </footer>
+</body>
+</html>
