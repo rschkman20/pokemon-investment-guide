@@ -4,21 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Pokémon Card Investment Guide</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <style>
     body {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Inter', sans-serif;
       background-color: #f8f9fa;
       color: #333;
       margin: 0;
       padding: 0;
+      -webkit-font-smoothing: antialiased;
     }
 
     nav {
       background-color: #2a75bb;
       display: flex;
       justify-content: center;
-      padding: 10px 0;
+      padding: 12px 0;
       position: sticky;
       top: 0;
       z-index: 1000;
@@ -27,8 +29,9 @@
     nav a {
       color: #fff;
       text-decoration: none;
-      margin: 0 15px;
-      font-weight: bold;
+      margin: 0 20px;
+      font-weight: 600;
+      font-size: 1rem;
       transition: opacity 0.2s ease-in-out;
     }
 
@@ -66,153 +69,187 @@
     }
 
     .hero h1 {
-      font-size: 2.8rem;
-      margin-bottom: 10px;
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 15px;
     }
 
     .hero p {
       font-size: 1.2rem;
-      margin-bottom: 20px;
+      font-weight: 400;
+      margin-bottom: 25px;
     }
 
     .cta-button {
       background-color: #ffcb05;
       color: #2a75bb;
-      padding: 12px 25px;
+      padding: 14px 30px;
       text-decoration: none;
-      font-weight: bold;
-      border-radius: 5px;
-      transition: background-color 0.3s;
+      font-weight: 600;
+      font-size: 1rem;
+      border-radius: 6px;
+      transition: background-color 0.3s, transform 0.2s;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     }
 
     .cta-button:hover {
       background-color: #f2b807;
+      transform: translateY(-2px);
     }
 
-    .comparison {
-      background-color: #ffffff;
-      padding: 40px 0;
-      border-top: 1px solid #ddd;
-      border-bottom: 1px solid #ddd;
-    }
-
-    .comparison h2 {
-      text-align: center;
-      color: #2a75bb;
-      margin-bottom: 10px;
-    }
-
-    .comparison p {
-      text-align: center;
-      max-width: 700px;
-      margin: 0 auto 30px auto;
-    }
-
-    .comparison-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
+    section {
+      padding: 60px 20px;
       max-width: 1000px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    .comparison-item {
-      background-color: #f8f9fa;
-      border: 2px solid #2a75bb;
-      border-radius: 8px;
-      padding: 20px;
-      text-align: center;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    }
-
-    .comparison-item h3 {
-      color: #2a75bb;
-      margin-bottom: 10px;
-    }
-
-    .container {
-      padding: 20px;
-      max-width: 800px;
       margin: auto;
     }
 
     h2 {
       color: #2a75bb;
-      margin-top: 30px;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-align: center;
     }
 
-    .card-tip {
-      background-color: #fff;
-      border-left: 6px solid #2a75bb;
-      padding: 10px 15px;
-      margin-bottom: 15px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    .comparison-grid, .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 25px;
+    }
+
+    .comparison-item, .card-tip, .gallery-card {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .gallery-card img {
+      width: 100%;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+
+    .newsletter {
+      background: #fff;
+      padding: 40px;
+      text-align: center;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    }
+
+    .newsletter input {
+      padding: 12px;
+      width: 60%;
+      max-width: 400px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-right: 10px;
+    }
+
+    .newsletter button {
+      padding: 12px 20px;
+      background-color: #2a75bb;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
     }
 
     footer {
       background-color: #2a75bb;
       color: #fff;
       text-align: center;
-      padding: 15px;
-      margin-top: 40px;
+      padding: 20px;
+      margin-top: 60px;
     }
   </style>
 </head>
 <body>
 
   <nav>
-    <a href="index.html">Home</a>
-    <a href="featured.html">Featured</a>
-    <a href="about.html">About</a>
-    <a href="sealed.html">Sealed Products</a>
-    <a href="graded.html">Graded Cards</a>
-    <a href="raw.html">Raw Cards</a>
-    <a href="contact.html">Contact Us</a>
+    <a href="#">Home</a>
+    <a href="#">Featured</a>
+    <a href="#">About</a>
+    <a href="#">Sealed Products</a>
+    <a href="#">Graded Cards</a>
+    <a href="#">Raw Cards</a>
+    <a href="#">Contact Us</a>
   </nav>
 
   <header class="hero">
-    <div class="hero-content">
+    <div class="hero-content" data-aos="fade-up">
       <h1>Pokémon Card Investment Guide</h1>
       <p>Discover which cards are worth your money — vintage or modern, raw or graded.</p>
-      <a href="featured.html" class="cta-button">Explore Investment Picks</a>
+      <a href="#" class="cta-button">Explore Investment Picks</a>
     </div>
   </header>
 
-  <section class="comparison">
-    <div class="container">
-      <h2>📈 10-Year Investment Growth Comparison</h2>
-      <p>Here’s how Pokémon booster boxes compare to traditional investment options over the past decade:</p>
-
-      <div class="comparison-grid">
-        <div class="comparison-item">
-          <h3>Pokémon Booster Box (Base Set)</h3>
-          <p><strong>2013:</strong> $300<br><strong>2023:</strong> $20,000<br><strong>Growth:</strong> 6,567%</p>
-        </div>
-
-        <div class="comparison-item">
-          <h3>S&P 500 Index</h3>
-          <p><strong>2013:</strong> 1,600<br><strong>2023:</strong> 4,200<br><strong>Growth:</strong> 162%</p>
-        </div>
-
-        <div class="comparison-item">
-          <h3>Gold</h3>
-          <p><strong>2013:</strong> $1,300<br><strong>2023:</strong> $2,000<br><strong>Growth:</strong> 54%</p>
-        </div>
+  <section class="comparison" data-aos="fade-up">
+    <h2>📈 10-Year Investment Growth Comparison</h2>
+    <div class="comparison-grid">
+      <div class="comparison-item">
+        <h3>Pokémon Booster Box (Base Set)</h3>
+        <p><strong>2013:</strong> $300<br><strong>2023:</strong> $20,000<br><strong>Growth:</strong> 6,567%</p>
+      </div>
+      <div class="comparison-item">
+        <h3>S&P 500 Index</h3>
+        <p><strong>2013:</strong> 1,600<br><strong>2023:</strong> 4,200<br><strong>Growth:</strong> 162%</p>
+      </div>
+      <div class="comparison-item">
+        <h3>Gold</h3>
+        <p><strong>2013:</strong> $1,300<br><strong>2023:</strong> $2,000<br><strong>Growth:</strong> 54%</p>
       </div>
     </div>
   </section>
 
-  <div class="container">
-    <h2>🔥 Top Tips for New Investors</h2>
-    <div class="card-tip">✅ Focus on PSA-graded cards, especially 9 or 10 ratings.</div>
-    <div class="card-tip">✅ Vintage sets like Base Set, Jungle, and Neo Genesis have the strongest value retention.</div>
-    <div class="card-tip">✅ Watch modern trends — some alternate arts and promo cards skyrocket fast.</div>
-  </div>
+  <section data-aos="fade-up">
+    <h2>🧠 Investment Strategy Types</h2>
+    <div class="card-tip">🔁 <strong>Flippers:</strong> Buy undervalued cards now and sell within 3–6 months.</div>
+    <div class="card-tip">📦 <strong>Long-Term Holders:</strong> Focus on sealed vintage products with low population.</div>
+    <div class="card-tip">🧪 <strong>Speculators:</strong> Bet on modern alternate arts or promo cards going viral.</div>
+  </section>
+
+  <section data-aos="fade-up">
+    <h2>📸 Featured Sets Gallery</h2>
+    <div class="gallery-grid">
+      <div class="gallery-card">
+        <img src="https://images.pokemontcg.io/base1/1_hires.png" alt="Base Set Charizard">
+        <p><strong>Base Set</strong> — The holy grail of Pokémon investing.</p>
+      </div>
+      <div class="gallery-card">
+        <img src="https://images.pokemontcg.io/neo1/1_hires.png" alt="Neo Genesis Lugia">
+        <p><strong>Neo Genesis</strong> — Iconic second-gen collector’s dream.</p>
+      </div>
+      <div class="gallery-card">
+        <img src="https://images.pokemontcg.io/swsh45/SWSH077_hires.png" alt="Modern Promo Pikachu">
+        <p><strong>Modern Promos</strong> — Low entry price with viral upside.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-aos="fade-up">
+    <h2>📬 Join Our Investor Newsletter</h2>
+    <div class="newsletter">
+      <p>Get exclusive insights and underpriced card alerts straight to your inbox.</p>
+      <input type="email" placeholder="Enter your email" />
+      <button>Subscribe</button>
+    </div>
+  </section>
 
   <footer>
     <p>© 2025 Pokémon Investment Guide — Created by Ryan Schokman</p>
   </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 800,
+      offset: 120,
+    });
+  </script>
 
 </body>
 </html>
