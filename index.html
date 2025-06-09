@@ -1033,8 +1033,26 @@
         const toggle = card.querySelector('.more-toggle');
         toggle.addEventListener('click', e => {
           e.stopPropagation();
-          card.classList.toggle('open');
-          toggle.innerHTML = card.classList.contains('open') ? 'Less Info <span class="arrow">▲</span>' : 'More Info <span class="arrow">▼</span>';
+
+          const currentlyOpen = card.classList.contains('open');
+          document.querySelectorAll('.strategy-card.open').forEach(other => {
+            if (other !== card) {
+              other.classList.remove('open');
+              const otherToggle = other.querySelector('.more-toggle');
+              if (otherToggle) {
+                otherToggle.innerHTML = 'More Info <span class="arrow">▼</span>';
+              }
+            }
+          });
+
+          if (currentlyOpen) {
+            card.classList.remove('open');
+          } else {
+            card.classList.add('open');
+          }
+          toggle.innerHTML = card.classList.contains('open')
+            ? 'Less Info <span class="arrow">▲</span>'
+            : 'More Info <span class="arrow">▼</span>';
         });
       });
     </script>
