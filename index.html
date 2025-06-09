@@ -6,6 +6,7 @@
   <title>Pokémon Card Investment Guide</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <style>
     body {
@@ -462,6 +463,78 @@
         transform: translateY(0);
       }
     }
+    .comparison {
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .comparison h2 {
+      font-family: "DM Serif Display", serif;
+      font-size: 2.2rem;
+      position: relative;
+      display: inline-block;
+      padding-bottom: 6px;
+    }
+    .comparison h2::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, #d32f2f, #111);
+    }
+
+    .comparison-grid {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .comparison-item {
+      position: relative;
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(6px);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      min-height: 220px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .comparison-item:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    .comparison-item .icon {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      font-size: 1.4rem;
+    }
+    .comparison-item h3 {
+      margin-top: 0;
+      padding-left: 32px;
+    }
+    .year {
+      font-size: 0.9rem;
+      color: #777;
+    }
+    .growth {
+      font-weight: 700;
+      color: #2e7d32;
+    }
+    .progress {
+      height: 8px;
+      background: #e0e0e0;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: auto;
+    }
+    .progress-bar {
+      height: 100%;
+      width: 0;
+      background: #2e7d32;
+    }
 
   </style>
 </head>
@@ -491,16 +564,46 @@
     <h2>📈 10-Year Investment Growth Comparison</h2>
     <div class="comparison-grid">
       <div class="comparison-item">
+        <span class="icon">🔥</span>
         <h3>Pokémon Booster Box (Base Set)</h3>
-        <p><strong>2013:</strong> $300<br><strong>2023:</strong> $20,000<br><strong>Growth:</strong> 6,567%</p>
+        <p>
+          <span class="year">2013:</span>
+          <span class="value" data-count="300">$0.00</span><br>
+          <span class="year">2023:</span>
+          <span class="value" data-count="20000">$0.00</span><br>
+          <span class="growth">Growth: <span class="percent" data-count="6567">0%</span></span>
+        </p>
+        <div class="progress" aria-hidden="true">
+          <div class="progress-bar" data-progress="90"></div>
+        </div>
       </div>
       <div class="comparison-item">
-        <h3>S&P 500 Index</h3>
-        <p><strong>2013:</strong> 1,600<br><strong>2023:</strong> 4,200<br><strong>Growth:</strong> 162%</p>
+        <span class="icon">📈</span>
+        <h3>S&amp;P 500 Index</h3>
+        <p>
+          <span class="year">2013:</span>
+          <span class="value" data-count="1600">0</span><br>
+          <span class="year">2023:</span>
+          <span class="value" data-count="4200">0</span><br>
+          <span class="growth">Growth: <span class="percent" data-count="162">0</span></span>
+        </p>
+        <div class="progress" aria-hidden="true">
+          <div class="progress-bar" data-progress="30"></div>
+        </div>
       </div>
       <div class="comparison-item">
+        <span class="icon">🪙</span>
         <h3>Gold</h3>
-        <p><strong>2013:</strong> $1,300<br><strong>2023:</strong> $2,000<br><strong>Growth:</strong> 54%</p>
+        <p>
+          <span class="year">2013:</span>
+          <span class="value" data-count="1300">$0.00</span><br>
+          <span class="year">2023:</span>
+          <span class="value" data-count="2000">$0.00</span><br>
+          <span class="growth">Growth: <span class="percent" data-count="54">0</span></span>
+        </p>
+        <div class="progress" aria-hidden="true">
+          <div class="progress-bar" data-progress="10"></div>
+        </div>
       </div>
     </div>
   </section>
@@ -715,6 +818,51 @@
           pokedexText.textContent = 'Card Index Loaded';
         }, 1500);
       }
+      const items = document.querySelectorAll(".comparison-item");
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const item = entry.target;
+            item.querySelectorAll(".value").forEach(el => {
+              const target = parseFloat(el.dataset.count);
+              let start = 0;
+              const isCurrency = el.textContent.trim().startsWith("$");
+              const step = target / 60;
+              function tick() {
+                start += step;
+                if (start >= target) {
+                  el.textContent = isCurrency ? "$" + target.toFixed(2) : Math.round(target);
+                } else {
+                  el.textContent = isCurrency ? "$" + start.toFixed(2) : Math.round(start);
+                  requestAnimationFrame(tick);
+                }
+              }
+              tick();
+            });
+            item.querySelectorAll(".percent").forEach(el => {
+              const target = parseFloat(el.dataset.count);
+              let start = 0;
+              const step = target / 60;
+              function tick() {
+                start += step;
+                if (start >= target) {
+                  el.textContent = target + "%";
+                } else {
+                  el.textContent = Math.round(start) + "%";
+                  requestAnimationFrame(tick);
+                }
+              }
+              tick();
+            });
+            const bar = item.querySelector(".progress-bar");
+            if (bar) {
+              bar.style.width = bar.dataset.progress + "%";
+            }
+            io.unobserve(item);
+          }
+        });
+      }, { threshold: 0.4 });
+      items.forEach(it => io.observe(it));
     </script>
 
 </body>
