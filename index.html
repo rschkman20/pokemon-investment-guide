@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Pokémon Card Investment Guide</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <style>
     body {
@@ -300,6 +301,168 @@
       pointer-events: none;
     }
 
+    .pokedex-button {
+      position: fixed;
+      top: 50%;
+      left: 0;
+      transform: translate(-50%, -50%);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 1001;
+      transition: transform 0.3s;
+    }
+
+    .pokedex-button:hover {
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+
+    .pokedex-sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 320px;
+      background: #d32f2f;
+      border-right: 8px solid #000;
+      box-shadow: 2px 0 8px rgba(0,0,0,0.3);
+      border-radius: 0 8px 8px 0;
+      transform: translateX(-100%);
+      transition: transform 0.4s;
+      display: flex;
+      flex-direction: column;
+      z-index: 1002;
+    }
+
+    .pokedex-sidebar.open {
+      transform: translateX(0);
+    }
+
+    .pokedex-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.4);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      z-index: 1001;
+    }
+
+    .pokedex-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .pokedex-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .pokedex-screen {
+      background: #000;
+      color: #0f0;
+      margin: 20px;
+      padding: 15px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'VT323', monospace;
+      height: 50px;
+    }
+
+    .pokedex-text {
+      animation: flicker 1s linear infinite;
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .pokedex-cards {
+      list-style: none;
+      padding: 0 20px;
+      margin: 0;
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .pokedex-cards li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      background: rgba(0,0,0,0.1);
+      padding: 8px;
+      border-radius: 4px;
+      color: #fff;
+    }
+
+    .pokedex-cards li:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    .pokedex-cards img {
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .pokedex-controls {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px;
+    }
+
+    .pokedex-light {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #555;
+    }
+
+    .pokedex-light.red {
+      background: #f44336;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%, 50%, 100% { opacity: 1; }
+      25%, 75% { opacity: 0.3; }
+    }
+
+    @media (max-width: 768px) {
+      .pokedex-sidebar {
+        width: 100%;
+        height: 75vh;
+        top: auto;
+        bottom: 0;
+        transform: translateY(100%);
+        border-right: none;
+        border-top: 8px solid #000;
+        border-radius: 8px 8px 0 0;
+      }
+
+      .pokedex-sidebar.open {
+        transform: translateY(0);
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -449,6 +612,27 @@
     <p>© 2025 Pokémon Investment Guide — Created by Ryan Schokman</p>
   </footer>
 
+  <div class="pokedex-button" aria-label="Open Pokédex" title="Open Pokédex">
+    <img src="pokeball.svg" alt="Pokéball" />
+  </div>
+  <div class="pokedex-overlay"></div>
+  <aside class="pokedex-sidebar" aria-hidden="true" role="dialog">
+    <button class="pokedex-close" aria-label="Close Pokédex">&times;</button>
+    <div class="pokedex-screen">
+      <span class="pokedex-text">Initializing...</span>
+    </div>
+    <ul class="pokedex-cards">
+      <li><img src="https://images.pokemontcg.io/base1/4_hires.png" alt="Charizard"><span>Charizard – Base Set</span><span class="price"></span></li>
+      <li><img src="https://images.pokemontcg.io/neo1/9_hires.png" alt="Lugia"><span>Lugia – Neo Genesis</span><span class="price"></span></li>
+      <li><img src="https://images.pokemontcg.io/swsh45/54_hires.png" alt="Pikachu V"><span>Pikachu V – Promo</span><span class="price"></span></li>
+    </ul>
+    <div class="pokedex-controls">
+      <span class="pokedex-light red"></span>
+      <span class="pokedex-light"></span>
+      <span class="pokedex-light"></span>
+    </div>
+  </aside>
+
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
   <script>
@@ -495,6 +679,42 @@
           }
         });
       });
+
+      const pokedexBtn = document.querySelector('.pokedex-button');
+      const pokedexSidebar = document.querySelector('.pokedex-sidebar');
+      const pokedexOverlay = document.querySelector('.pokedex-overlay');
+      const pokedexClose = document.querySelector('.pokedex-close');
+      const pokedexText = document.querySelector('.pokedex-text');
+
+      function openPokedex() {
+        pokedexSidebar.classList.add('open');
+        pokedexOverlay.classList.add('active');
+        pokedexSidebar.setAttribute('aria-hidden', 'false');
+        pokedexText.textContent = 'Card Index Loaded';
+        localStorage.setItem('pokedexOpen', 'true');
+      }
+
+      function closePokedex() {
+        pokedexSidebar.classList.remove('open');
+        pokedexOverlay.classList.remove('active');
+        pokedexSidebar.setAttribute('aria-hidden', 'true');
+        localStorage.setItem('pokedexOpen', 'false');
+      }
+
+      pokedexBtn.addEventListener('click', openPokedex);
+      pokedexClose.addEventListener('click', closePokedex);
+      pokedexOverlay.addEventListener('click', closePokedex);
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closePokedex();
+      });
+
+      if (localStorage.getItem('pokedexOpen') === 'true') {
+        openPokedex();
+      } else {
+        setTimeout(() => {
+          pokedexText.textContent = 'Card Index Loaded';
+        }, 1500);
+      }
     </script>
 
 </body>
