@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Pokémon Card Investment Guide</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Playfair+Display:wght@400;700&family=Inter:ital,wght@0,400;0,600;1,400&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -182,22 +182,96 @@
       font-size: 1.2rem;
     }
 
-    .reviews-carousel {
-      overflow: hidden;
-      position: relative;
-    }
-
-    .reviews-carousel .review {
-      display: none;
-      background: #fff;
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    .reviews-section {
+      background: #f8f8f8 url('pokeball.svg') center/160px no-repeat;
       text-align: center;
+      padding-top: 80px;
+      padding-bottom: 80px;
     }
 
-    .reviews-carousel .review.active {
-      display: block;
+    .reviews-section h2 {
+      font-family: 'DM Serif Display', serif;
+      margin-bottom: 30px;
+      font-size: 2rem;
+    }
+
+    .reviews-container {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      padding-bottom: 20px;
+      scroll-snap-type: x mandatory;
+    }
+
+    .testimonial-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      flex: 0 0 280px;
+      scroll-snap-align: start;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+    }
+
+    .testimonial-quote {
+      font-family: 'Inter', sans-serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      margin-bottom: 18px;
+    }
+
+    .reviewer-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    .reviewer-info .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+
+    .reviewer-info .name {
+      font-weight: 600;
+    }
+
+    .badge {
+      background: #f0f0f0;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: #555;
+      display: inline-block;
+      margin-top: 2px;
+    }
+
+    .stars {
+      font-size: 1.1rem;
+    }
+
+    .submit-review-button {
+      margin-top: 20px;
+      display: inline-block;
+      background: #111;
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background-color 0.2s, transform 0.2s;
+    }
+
+    .submit-review-button:hover {
+      background-color: #333;
+      transform: translateY(-2px);
     }
 
     .newsletter {
@@ -809,11 +883,42 @@
 
   <section data-aos="fade-up" class="reviews-section">
     <h2>⭐ Trainer Reviews</h2>
-    <div class="reviews-carousel" id="reviews-carousel">
-      <div class="review active">"Great guide! Learned so much." — Ash K.</div>
-      <div class="review">"My collection doubled in value." — Misty W.</div>
-      <div class="review">"Clear advice for beginners." — Brock S.</div>
+    <div class="reviews-container">
+      <div class="testimonial-card" data-aos="fade-up" data-aos-delay="0">
+        <p class="testimonial-quote">"I followed the grading tips and flipped my first Charizard. I’m hooked!"</p>
+        <div class="reviewer-info">
+          <img class="avatar" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png" alt="Ash Ketchum avatar">
+          <div class="name-badge">
+            <div class="name">Ash Ketchum, Pallet Town</div>
+            <span class="badge">Flipper</span>
+          </div>
+        </div>
+        <div class="stars">⭐️⭐️⭐️⭐️⭐️</div>
+      </div>
+      <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+        <p class="testimonial-quote">"Holding sealed booster boxes has paid off nicely over the years."</p>
+        <div class="reviewer-info">
+          <img class="avatar" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/120.png" alt="Misty avatar">
+          <div class="name-badge">
+            <div class="name">Misty Waterflower, Cerulean City</div>
+            <span class="badge">Long-Term Holder</span>
+          </div>
+        </div>
+        <div class="stars">⭐️⭐️⭐️⭐️⭐️</div>
+      </div>
+      <div class="testimonial-card" data-aos="fade-up" data-aos-delay="400">
+        <p class="testimonial-quote">"Speculating on underpriced holo rares is my strategy."</p>
+        <div class="reviewer-info">
+          <img class="avatar" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/95.png" alt="Brock avatar">
+          <div class="name-badge">
+            <div class="name">Brock Slate, Pewter City</div>
+            <span class="badge">Speculator</span>
+          </div>
+        </div>
+        <div class="stars">⭐️⭐️⭐️⭐️⭐️</div>
+      </div>
     </div>
+    <a href="#" class="submit-review-button">📝 Submit Your Testimonial</a>
   </section>
 
   <section data-aos="fade-up" class="faq">
@@ -921,13 +1026,6 @@
       detectRetina: true
     });
 
-      const reviews = document.querySelectorAll('#reviews-carousel .review');
-      let currentReview = 0;
-      setInterval(() => {
-        reviews[currentReview].classList.remove('active');
-        currentReview = (currentReview + 1) % reviews.length;
-        reviews[currentReview].classList.add('active');
-      }, 3000);
 
       document.querySelectorAll('.faq-question').forEach(q => {
         q.addEventListener('click', () => {
