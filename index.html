@@ -823,41 +823,47 @@
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             const item = entry.target;
-            item.querySelectorAll(".value").forEach(el => {
-              const target = parseFloat(el.dataset.count);
-              let start = 0;
-              const isCurrency = el.textContent.trim().startsWith("$");
-              const step = target / 60;
-              function tick() {
-                start += step;
-                if (start >= target) {
-                  el.textContent = isCurrency ? "$" + target.toFixed(2) : Math.round(target);
-                } else {
-                  el.textContent = isCurrency ? "$" + start.toFixed(2) : Math.round(start);
-                  requestAnimationFrame(tick);
-                }
-              }
-              tick();
-            });
-            item.querySelectorAll(".percent").forEach(el => {
-              const target = parseFloat(el.dataset.count);
-              let start = 0;
-              const step = target / 60;
-              function tick() {
-                start += step;
-                if (start >= target) {
-                  el.textContent = target + "%";
-                } else {
-                  el.textContent = Math.round(start) + "%";
-                  requestAnimationFrame(tick);
-                }
-              }
-              tick();
-            });
+            const values = item.querySelectorAll(".value");
+            const percents = item.querySelectorAll(".percent");
             const bar = item.querySelector(".progress-bar");
-            if (bar) {
-              bar.style.width = bar.dataset.progress + "%";
+            const progressTarget = bar ? parseFloat(bar.dataset.progress) : 0;
+            let frame = 0;
+            const frames = 200;
+            function animate() {
+              frame++;
+              const ratio = Math.min(frame / frames, 1);
+              values.forEach(el => {
+                const target = parseFloat(el.dataset.count);
+                const isCurrency = el.textContent.trim().startsWith("$");
+                const val = target * ratio;
+                el.textContent = isCurrency ? "$" + val.toFixed(2) : Math.round(val);
+              });
+              percents.forEach(el => {
+                const target = parseFloat(el.dataset.count);
+                const val = target * ratio;
+                el.textContent = Math.round(val) + "%";
+              });
+              if (bar) {
+                bar.style.width = (progressTarget * ratio) + "%";
+              }
+              if (frame < frames) {
+                requestAnimationFrame(animate);
+              } else {
+                values.forEach(el => {
+                  const target = parseFloat(el.dataset.count);
+                  const isCurrency = el.textContent.trim().startsWith("$");
+                  el.textContent = isCurrency ? "$" + target.toFixed(2) : Math.round(target);
+                });
+                percents.forEach(el => {
+                  const target = parseFloat(el.dataset.count);
+                  el.textContent = target + "%";
+                });
+                if (bar) {
+                  bar.style.width = progressTarget + "%";
+                }
+              }
             }
+            animate();
             io.unobserve(item);
           }
         });
