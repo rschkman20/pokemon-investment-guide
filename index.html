@@ -195,12 +195,14 @@
       font-size: 2rem;
     }
 
-    .reviews-container {
+    .reviews-carousel {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .reviews-track {
       display: flex;
-      gap: 20px;
-      overflow-x: auto;
-      padding-bottom: 20px;
-      scroll-snap-type: x mandatory;
+      transition: transform 0.5s;
     }
 
     .testimonial-card {
@@ -208,8 +210,9 @@
       border-radius: 16px;
       padding: 24px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      flex: 0 0 280px;
-      scroll-snap-align: start;
+      flex: 0 0 100%;
+      max-width: 320px;
+      margin: 0 auto;
       transition: transform 0.3s, box-shadow 0.3s;
     }
 
@@ -257,6 +260,23 @@
       font-size: 1.1rem;
     }
 
+    .review-dots {
+      margin-top: 15px;
+    }
+
+    .review-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #ccc;
+      margin: 0 4px;
+      cursor: pointer;
+    }
+
+    .review-dot.active {
+      background: #111;
+    }
     .submit-review-button {
       margin-top: 20px;
       display: inline-block;
@@ -883,7 +903,7 @@
 
   <section data-aos="fade-up" class="reviews-section">
     <h2>⭐ Trainer Reviews</h2>
-    <div class="reviews-container">
+    <div class="reviews-carousel"><div class="reviews-track">
       <div class="testimonial-card" data-aos="fade-up" data-aos-delay="0">
         <p class="testimonial-quote">"I followed the grading tips and flipped my first Charizard. I’m hooked!"</p>
         <div class="reviewer-info">
@@ -917,6 +937,41 @@
         </div>
         <div class="stars">⭐️⭐️⭐️⭐️⭐️</div>
       </div>
+            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="600">
+          <p class="testimonial-quote">"The gallery made it easy to identify which sets to chase."</p>
+          <div class="reviewer-info">
+            <img class="avatar" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/94.png" alt="Gary avatar">
+            <div class="name-badge">
+              <div class="name">Gary Oak, Viridian City</div>
+              <span class="badge">Collector</span>
+            </div>
+          </div>
+          <div class="stars">⭐️⭐️⭐️⭐️⭐️</div>
+        </div>
+        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="800">
+          <p class="testimonial-quote">"Loved the step-by-step grading tutorial; got my first PSA 10!"</p>
+          <div class="reviewer-info">
+            <img class="avatar" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/669.png" alt="Serena avatar">
+            <div class="name-badge">
+              <div class="name">Serena, Vaniville Town</div>
+              <span class="badge">Grader</span>
+            </div>
+          </div>
+          <div class="stars">⭐️⭐️⭐️⭐️⭐️</div>
+        </div>
+        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="1000">
+          <p class="testimonial-quote">"The community tips helped me trade up quickly."</p>
+          <div class="reviewer-info">
+            <img class="avatar" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/149.png" alt="Lance avatar">
+            <div class="name-badge">
+              <div class="name">Lance, Blackthorn City</div>
+              <span class="badge">Trader</span>
+            </div>
+          </div>
+          <div class="stars">⭐️⭐️⭐️⭐️⭐️</div>
+        </div>
+      </div>
+      <div class="review-dots"></div>
     </div>
     <a href="#" class="submit-review-button">📝 Submit Your Testimonial</a>
   </section>
@@ -1127,6 +1182,29 @@
       }, { threshold: 0.4 });
       items.forEach(it => io.observe(it));
 
+      const track = document.querySelector('.reviews-track');
+      const cards = document.querySelectorAll('.reviews-track .testimonial-card');
+      const dotsContainer = document.querySelector('.review-dots');
+      let current = 0;
+      
+      function show(index) {
+        current = index;
+        track.style.transform = `translateX(-${index * 100}%)`;
+        dotsContainer.querySelectorAll('.review-dot').forEach((d, i) => {
+          d.classList.toggle('active', i == index);
+        });
+      }
+      
+      cards.forEach((card, i) => {
+        const dot = document.createElement('span');
+        dot.className = 'review-dot';
+        if (i === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => show(i));
+        dotsContainer.appendChild(dot);
+        card.addEventListener('click', () => show(i));
+      });
+      
+      setInterval(() => show((current + 1) % cards.length), 5000);
       document.querySelectorAll('.strategy-card').forEach(card => {
         const toggle = card.querySelector('.more-toggle');
         toggle.addEventListener('click', e => {
