@@ -536,6 +536,92 @@
       background: #2e7d32;
     }
 
+    .strategy-section {
+      position: relative;
+    }
+    .strategy-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url('pokeball.svg');
+      background-size: 100px;
+      background-repeat: repeat;
+      opacity: 0.04;
+      pointer-events: none;
+    }
+    .strategy-section > * {
+      position: relative;
+      z-index: 1;
+    }
+    .strategy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+    .strategy-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+    .strategy-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    .strategy-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .strategy-header .icon svg {
+      width: 25px;
+      height: 25px;
+      color: #0077b6;
+    }
+    .title {
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+    .badge {
+      background-color: #f5f5f5;
+      border-radius: 6px;
+      font-size: 12px;
+      padding: 4px 8px;
+      display: inline-block;
+      margin-top: 8px;
+    }
+    .description {
+      margin-top: 12px;
+    }
+    .more-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      margin-top: 12px;
+    }
+    .extra {
+      display: none;
+      margin-top: 12px;
+      padding: 12px;
+      background: #f9f9f9;
+      border-radius: 8px;
+      font-size: 0.9rem;
+    }
+    .strategy-card.open .extra {
+      display: block;
+    }
+    @media (max-width: 768px) {
+      .strategy-grid {
+        grid-template-columns: 1fr;
+      }
+      .strategy-card {
+        padding: 20px;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -608,11 +694,84 @@
     </div>
   </section>
 
-  <section data-aos="fade-up">
-    <h2>🧠 Investment Strategy Types</h2>
-    <div class="card-tip">🔁 <strong>Flippers:</strong> Buy undervalued cards now and sell within 3–6 months.</div>
-    <div class="card-tip">📦 <strong>Long-Term Holders:</strong> Focus on sealed vintage products with low population.</div>
-    <div class="card-tip">🧪 <strong>Speculators:</strong> Bet on modern alternate arts or promo cards going viral.</div>
+  <section class="strategy-section" data-aos="fade-up">
+    <h2>🧠 Choose Your Investment Path</h2>
+    <p class="section-intro">Pick a strategy that matches your goals — quick flips or long-term treasure hunts.</p>
+    <div class="strategy-grid">
+      <div class="strategy-card" data-aos="fade-up" data-aos-delay="0">
+        <div class="strategy-header">
+          <span class="icon">
+            <svg viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="2 12 6 16 10 12"></polyline>
+              <path d="M6 8V16"></path>
+              <polyline points="22 12 18 8 14 12"></polyline>
+              <path d="M18 16V8"></path>
+            </svg>
+          </span>
+          <div>
+            <span class="title">Flippers</span><br>
+            <span class="badge">Short-Term Strategy</span>
+          </div>
+        </div>
+        <p class="description">Buy undervalued cards now and sell within 3–6 months for quick gains.</p>
+        <button class="more-toggle">More Info <span class="arrow">▼</span></button>
+        <div class="extra">
+          <p><strong>💡 Pros</strong><br>Fast profit turnaround<br>Exciting and market-driven</p>
+          <p><strong>⚠️ Cons</strong><br>High risk<br>Sensitive to market hype</p>
+          <p><strong>📈 Example Cards</strong><br>GameStop Pikachu<br>Full-Art Galar Friends</p>
+          <p><strong>⏳ Ideal Hold Period</strong><br>1–6 months</p>
+          <p><strong>📊 Avg ROI</strong><br>25–70% (ungraded)<br>Variable with graded cards</p>
+        </div>
+      </div>
+      <div class="strategy-card" data-aos="fade-up" data-aos-delay="150">
+        <div class="strategy-header">
+          <span class="icon">
+            <svg viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+              <path d="M3 9h18M9 21V3"/>
+            </svg>
+          </span>
+          <div>
+            <span class="title">Long-Term Holders</span><br>
+            <span class="badge">Long-Term Strategy</span>
+          </div>
+        </div>
+        <p class="description">Focus on sealed vintage products with low population for steady appreciation.</p>
+        <button class="more-toggle">More Info <span class="arrow">▼</span></button>
+        <div class="extra">
+          <p><strong>💡 Pros</strong><br>Stable growth<br>Lower overall risk</p>
+          <p><strong>⚠️ Cons</strong><br>Funds tied up for years<br>Slower liquidity</p>
+          <p><strong>📈 Example Cards</strong><br>1st Edition Base Box<br>Legendary Collection Sealed</p>
+          <p><strong>⏳ Ideal Hold Period</strong><br>3–10 years</p>
+          <p><strong>📊 Avg ROI</strong><br>8–15% annually</p>
+        </div>
+      </div>
+      <div class="strategy-card" data-aos="fade-up" data-aos-delay="300">
+        <div class="strategy-header">
+          <span class="icon">
+            <svg viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="8" r="6"/>
+              <path d="M5 20h14"/>
+              <path d="M12 14v6"/>
+            </svg>
+          </span>
+          <div>
+            <span class="title">Speculators</span><br>
+            <span class="badge">Speculative Play</span>
+          </div>
+        </div>
+        <p class="description">Bet on modern alternate arts or promo cards going viral for big upside.</p>
+        <button class="more-toggle">More Info <span class="arrow">▼</span></button>
+        <div class="extra">
+          <p><strong>💡 Pros</strong><br>Potential jackpot returns<br>Fun chasing trends</p>
+          <p><strong>⚠️ Cons</strong><br>Highly volatile<br>Hype dependent</p>
+          <p><strong>📈 Example Cards</strong><br>Alternate Art Charizard<br>Limited Release Promos</p>
+          <p><strong>⏳ Ideal Hold Period</strong><br>6–18 months</p>
+          <p><strong>📊 Avg ROI</strong><br>0–150% depending on demand</p>
+        </div>
+      </div>
+    </div>
+    <div class="quiz-cta">❓ Not sure which strategy fits you? <a href="#" class="quiz-link">Take our 30-second quiz to match your investor style with the right card strategy.</a></div>
   </section>
 
   <section data-aos="fade-up">
@@ -869,6 +1028,33 @@
         });
       }, { threshold: 0.4 });
       items.forEach(it => io.observe(it));
+
+      document.querySelectorAll('.strategy-card').forEach(card => {
+        const toggle = card.querySelector('.more-toggle');
+        toggle.addEventListener('click', e => {
+          e.stopPropagation();
+
+          const currentlyOpen = card.classList.contains('open');
+          document.querySelectorAll('.strategy-card.open').forEach(other => {
+            if (other !== card) {
+              other.classList.remove('open');
+              const otherToggle = other.querySelector('.more-toggle');
+              if (otherToggle) {
+                otherToggle.innerHTML = 'More Info <span class="arrow">▼</span>';
+              }
+            }
+          });
+
+          if (currentlyOpen) {
+            card.classList.remove('open');
+          } else {
+            card.classList.add('open');
+          }
+          toggle.innerHTML = card.classList.contains('open')
+            ? 'Less Info <span class="arrow">▲</span>'
+            : 'More Info <span class="arrow">▼</span>';
+        });
+      });
     </script>
 
 </body>
