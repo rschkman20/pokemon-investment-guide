@@ -131,6 +131,24 @@
       margin-bottom: 10px;
     }
 
+    .reviews-carousel {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .reviews-carousel .review {
+      display: none;
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+
+    .reviews-carousel .review.active {
+      display: block;
+    }
+
     .newsletter {
       background: #fff;
       padding: 40px;
@@ -230,6 +248,15 @@
     </div>
   </section>
 
+  <section data-aos="fade-up" class="reviews-section">
+    <h2>⭐ Trainer Reviews</h2>
+    <div class="reviews-carousel" id="reviews-carousel">
+      <div class="review active">"Great guide! Learned so much." — Ash K.</div>
+      <div class="review">"My collection doubled in value." — Misty W.</div>
+      <div class="review">"Clear advice for beginners." — Brock S.</div>
+    </div>
+  </section>
+
   <section data-aos="fade-up">
     <h2>📬 Join Our Investor Newsletter</h2>
     <div class="newsletter">
@@ -249,6 +276,14 @@
       duration: 800,
       offset: 120,
     });
+
+    const reviews = document.querySelectorAll('#reviews-carousel .review');
+    let currentReview = 0;
+    setInterval(() => {
+      reviews[currentReview].classList.remove('active');
+      currentReview = (currentReview + 1) % reviews.length;
+      reviews[currentReview].classList.add('active');
+    }, 3000);
   </script>
 
 </body>
