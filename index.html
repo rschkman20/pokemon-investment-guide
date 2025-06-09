@@ -289,9 +289,22 @@
     .footer-contact p {
       margin: 4px 0;
     }
+
+    #particles-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
   </style>
 </head>
 <body>
+
+  <div id="particles-bg"></div>
 
   <nav>
     <a href="#">Home</a>
@@ -437,10 +450,29 @@
   </footer>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
   <script>
     AOS.init({
       duration: 800,
       offset: 120,
+    });
+
+    tsParticles.load("particles-bg", {
+      fpsLimit: 60,
+      particles: {
+        number: { value: 15 },
+        shape: {
+          type: "image",
+          image: { src: "pokeball.svg", width: 100, height: 100 }
+        },
+        opacity: {
+          value: 0.3,
+          animation: { enable: true, speed: 0.2, minimumValue: 0.1 }
+        },
+        size: { value: 40, random: { enable: true, minimumValue: 20 } },
+        move: { enable: true, direction: "top", speed: 0.5, random: true, outModes: { default: "out" } }
+      },
+      detectRetina: true
     });
 
       const reviews = document.querySelectorAll('#reviews-carousel .review');
