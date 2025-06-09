@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Pokémon Card Investment Guide</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Playfair+Display:wght@400;700&family=Inter:ital,wght@0,400;0,600;1,400&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -182,22 +182,116 @@
       font-size: 1.2rem;
     }
 
+    .reviews-section {
+      background: #f8f8f8 url('pokeball.svg') center/160px no-repeat;
+      text-align: center;
+      padding-top: 80px;
+      padding-bottom: 80px;
+    }
+
+    .reviews-section h2 {
+      font-family: 'DM Serif Display', serif;
+      margin-bottom: 30px;
+      font-size: 2rem;
+    }
+
     .reviews-carousel {
       overflow: hidden;
       position: relative;
     }
 
-    .reviews-carousel .review {
-      display: none;
-      background: #fff;
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      text-align: center;
+    .reviews-track {
+      display: flex;
+      transition: transform 0.5s;
     }
 
-    .reviews-carousel .review.active {
-      display: block;
+    .testimonial-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      flex: 0 0 100%;
+      max-width: 320px;
+      margin: 0 auto;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+    }
+
+    .testimonial-quote {
+      font-family: 'Inter', sans-serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      margin-bottom: 18px;
+    }
+
+    .reviewer-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    .reviewer-info .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+
+    .reviewer-info .name {
+      font-weight: 600;
+    }
+
+    .badge {
+      background: #f0f0f0;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: #555;
+      display: inline-block;
+      margin-top: 2px;
+    }
+
+    .stars {
+      font-size: 1.1rem;
+    }
+
+    .review-dots {
+      margin-top: 15px;
+    }
+
+    .review-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #ccc;
+      margin: 0 4px;
+      cursor: pointer;
+    }
+
+    .review-dot.active {
+      background: #111;
+    }
+    .submit-review-button {
+      margin-top: 20px;
+      display: inline-block;
+      background: #111;
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background-color 0.2s, transform 0.2s;
+    }
+
+    .submit-review-button:hover {
+      background-color: #333;
+      transform: translateY(-2px);
     }
 
     .newsletter {
@@ -809,11 +903,77 @@
 
   <section data-aos="fade-up" class="reviews-section">
     <h2>⭐ Trainer Reviews</h2>
-    <div class="reviews-carousel" id="reviews-carousel">
-      <div class="review active">"Great guide! Learned so much." — Ash K.</div>
-      <div class="review">"My collection doubled in value." — Misty W.</div>
-      <div class="review">"Clear advice for beginners." — Brock S.</div>
+    <div class="reviews-carousel"><div class="reviews-track">
+      <div class="testimonial-card" data-aos="fade-up" data-aos-delay="0">
+        <p class="testimonial-quote">"I followed the grading tips and flipped my first Charizard. I’m hooked!"</p>
+        <div class="reviewer-info">
+          <img class="avatar" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png" alt="Ash Ketchum avatar">
+          <div class="name-badge">
+            <div class="name">Ash Ketchum, Pallet Town</div>
+            <span class="badge">Flipper</span>
+          </div>
+        </div>
+        <div class="stars">⭐️⭐️⭐️⭐️⭐️</div>
+      </div>
+      <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+        <p class="testimonial-quote">"Holding sealed booster boxes has paid off nicely over the years."</p>
+        <div class="reviewer-info">
+          <img class="avatar" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/120.png" alt="Misty avatar">
+          <div class="name-badge">
+            <div class="name">Misty Waterflower, Cerulean City</div>
+            <span class="badge">Long-Term Holder</span>
+          </div>
+        </div>
+        <div class="stars">⭐️⭐️⭐️⭐️⭐️</div>
+      </div>
+      <div class="testimonial-card" data-aos="fade-up" data-aos-delay="400">
+        <p class="testimonial-quote">"Speculating on underpriced holo rares is my strategy."</p>
+        <div class="reviewer-info">
+          <img class="avatar" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/95.png" alt="Brock avatar">
+          <div class="name-badge">
+            <div class="name">Brock Slate, Pewter City</div>
+            <span class="badge">Speculator</span>
+          </div>
+        </div>
+        <div class="stars">⭐️⭐️⭐️⭐️⭐️</div>
+      </div>
+            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="600">
+          <p class="testimonial-quote">"The gallery made it easy to identify which sets to chase."</p>
+          <div class="reviewer-info">
+            <img class="avatar" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/94.png" alt="Gary avatar">
+            <div class="name-badge">
+              <div class="name">Gary Oak, Viridian City</div>
+              <span class="badge">Collector</span>
+            </div>
+          </div>
+          <div class="stars">⭐️⭐️⭐️⭐️⭐️</div>
+        </div>
+        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="800">
+          <p class="testimonial-quote">"Loved the step-by-step grading tutorial; got my first PSA 10!"</p>
+          <div class="reviewer-info">
+            <img class="avatar" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/669.png" alt="Serena avatar">
+            <div class="name-badge">
+              <div class="name">Serena, Vaniville Town</div>
+              <span class="badge">Grader</span>
+            </div>
+          </div>
+          <div class="stars">⭐️⭐️⭐️⭐️⭐️</div>
+        </div>
+        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="1000">
+          <p class="testimonial-quote">"The community tips helped me trade up quickly."</p>
+          <div class="reviewer-info">
+            <img class="avatar" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/149.png" alt="Lance avatar">
+            <div class="name-badge">
+              <div class="name">Lance, Blackthorn City</div>
+              <span class="badge">Trader</span>
+            </div>
+          </div>
+          <div class="stars">⭐️⭐️⭐️⭐️⭐️</div>
+        </div>
+      </div>
+      <div class="review-dots"></div>
     </div>
+    <a href="#" class="submit-review-button">📝 Submit Your Testimonial</a>
   </section>
 
   <section data-aos="fade-up" class="faq">
@@ -921,13 +1081,6 @@
       detectRetina: true
     });
 
-      const reviews = document.querySelectorAll('#reviews-carousel .review');
-      let currentReview = 0;
-      setInterval(() => {
-        reviews[currentReview].classList.remove('active');
-        currentReview = (currentReview + 1) % reviews.length;
-        reviews[currentReview].classList.add('active');
-      }, 3000);
 
       document.querySelectorAll('.faq-question').forEach(q => {
         q.addEventListener('click', () => {
@@ -1029,6 +1182,29 @@
       }, { threshold: 0.4 });
       items.forEach(it => io.observe(it));
 
+      const track = document.querySelector('.reviews-track');
+      const cards = document.querySelectorAll('.reviews-track .testimonial-card');
+      const dotsContainer = document.querySelector('.review-dots');
+      let current = 0;
+      
+      function show(index) {
+        current = index;
+        track.style.transform = `translateX(-${index * 100}%)`;
+        dotsContainer.querySelectorAll('.review-dot').forEach((d, i) => {
+          d.classList.toggle('active', i == index);
+        });
+      }
+      
+      cards.forEach((card, i) => {
+        const dot = document.createElement('span');
+        dot.className = 'review-dot';
+        if (i === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => show(i));
+        dotsContainer.appendChild(dot);
+        card.addEventListener('click', () => show(i));
+      });
+      
+      setInterval(() => show((current + 1) % cards.length), 5000);
       document.querySelectorAll('.strategy-card').forEach(card => {
         const toggle = card.querySelector('.more-toggle');
         toggle.addEventListener('click', e => {
