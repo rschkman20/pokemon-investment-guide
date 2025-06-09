@@ -210,15 +210,53 @@
       margin-right: 10px;
     }
 
-    .newsletter button {
-      padding: 12px 20px;
-      background-color: #2a75bb;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: 600;
-    }
+      .newsletter button {
+        padding: 12px 20px;
+        background-color: #2a75bb;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: 600;
+      }
+
+      .faq {
+        margin-top: 40px;
+      }
+
+      .faq-item {
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        overflow: hidden;
+      }
+
+      .faq-question {
+        background-color: #2a75bb;
+        color: #fff;
+        padding: 15px;
+        cursor: pointer;
+        position: relative;
+        font-weight: 600;
+      }
+
+      .faq-question::after {
+        content: "\25BC";
+        position: absolute;
+        right: 20px;
+        transition: transform 0.3s;
+      }
+
+      .faq-item.open .faq-question::after {
+        transform: rotate(180deg);
+      }
+
+      .faq-answer {
+        display: none;
+        padding: 15px;
+        background-color: #fff;
+        color: #333;
+      }
 
     footer {
       background-color: #2a75bb;
@@ -316,6 +354,40 @@
     </div>
   </section>
 
+  <section data-aos="fade-up" class="faq">
+    <h2>❓ Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+      <div class="faq-question">How do I know which Pokémon cards will increase in value?</div>
+      <div class="faq-answer">Research historical prices, rarity, and collector demand before purchasing.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">Should I invest in sealed products or individual cards?</div>
+      <div class="faq-answer">Sealed products tend to be safer long-term holds, while individual cards can offer quicker returns if graded highly.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">How do I store my collection safely?</div>
+      <div class="faq-answer">Store cards in acid-free sleeves, top loaders, or graded cases and keep them in a cool, dry place.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">What grading service should I use?</div>
+      <div class="faq-answer">The most reputable grading services are PSA, Beckett (BGS), and CGC.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">Are modern cards a good investment?</div>
+      <div class="faq-answer">Modern cards can appreciate if they feature popular Pokémon, low print runs, or unique artwork.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">Where can I buy Pokémon cards for investment?</div>
+      <div class="faq-answer">Trusted sources include hobby shops, online marketplaces, and official Pokémon product retailers.</div>
+    </div>
+  </section>
+
   <section data-aos="fade-up">
     <h2>📬 Join Our Investor Newsletter</h2>
     <div class="newsletter">
@@ -336,14 +408,27 @@
       offset: 120,
     });
 
-    const reviews = document.querySelectorAll('#reviews-carousel .review');
-    let currentReview = 0;
-    setInterval(() => {
-      reviews[currentReview].classList.remove('active');
-      currentReview = (currentReview + 1) % reviews.length;
-      reviews[currentReview].classList.add('active');
-    }, 3000);
-  </script>
+      const reviews = document.querySelectorAll('#reviews-carousel .review');
+      let currentReview = 0;
+      setInterval(() => {
+        reviews[currentReview].classList.remove('active');
+        currentReview = (currentReview + 1) % reviews.length;
+        reviews[currentReview].classList.add('active');
+      }, 3000);
+
+      document.querySelectorAll('.faq-question').forEach(q => {
+        q.addEventListener('click', () => {
+          const item = q.parentElement;
+          const answer = q.nextElementSibling;
+          item.classList.toggle('open');
+          if (answer.style.display === 'block') {
+            answer.style.display = 'none';
+          } else {
+            answer.style.display = 'block';
+          }
+        });
+      });
+    </script>
 
 </body>
 </html>
