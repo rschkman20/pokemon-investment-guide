@@ -617,6 +617,92 @@
       font-weight: 700;
       color: #2e7d32;
     }
+
+    .top-performer {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(255, 140, 0, 0.6);
+      animation: pulseGlow 2s infinite;
+    }
+
+    .top-performer:hover {
+      transform: scale(1.07) rotateX(4deg) rotateY(-4deg);
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% {
+        box-shadow: 0 0 10px rgba(255, 140, 0, 0.6), 0 0 20px rgba(255, 140, 0, 0.4);
+      }
+      50% {
+        box-shadow: 0 0 20px rgba(255, 140, 0, 0.8), 0 0 30px rgba(255, 140, 0, 0.6);
+      }
+    }
+
+    .top-performer .growth {
+      background: linear-gradient(90deg, gold, darkorange);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .top-badge {
+      position: absolute;
+      top: 8px;
+      right: -4px;
+      background: linear-gradient(90deg, gold, orange);
+      color: #111;
+      font-size: 0.75rem;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: 700;
+      transform: rotate(10deg);
+    }
+
+    .rank-label {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .rank-first { background: goldenrod; }
+    .rank-second { background: silver; color: #111; }
+    .rank-third { background: peru; }
+
+    .standout-title {
+      font-weight: 700;
+      font-style: italic;
+      color: darkorange;
+      text-shadow: 0 0 6px rgba(255, 140, 0, 0.4);
+    }
+
+    .callout {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      font-size: 0.8rem;
+      background: #fff5cc;
+      color: #111;
+      padding: 4px 6px;
+      border-radius: 4px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    @keyframes flash {
+      from {
+        box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.8);
+      }
+      to {
+        box-shadow: 0 0 10px 8px rgba(255, 215, 0, 0);
+      }
+    }
+
+    .top-performer.flash {
+      animation: flash 0.6s ease-out;
+    }
     .progress {
       height: 8px;
       background: #e0e0e0;
@@ -743,9 +829,12 @@
   <section class="comparison" data-aos="fade-up">
     <h2>📈 10-Year Investment Growth Comparison</h2>
     <div class="comparison-grid">
-      <div class="comparison-item">
+      <div class="comparison-item top-performer">
         <span class="icon">🔥</span>
-        <h3>Pokémon Booster Box (Base Set)</h3>
+        <span class="rank-label rank-first">1st – 6567% Gain</span>
+        <span class="top-badge">💰 Highest Return</span>
+        <h3 class="standout-title">Pokémon Booster Box (Base Set)</h3>
+        <div class="callout">66× 📊</div>
         <p>
           <span class="year">2013:</span>
           <span class="value" data-count="300">$0.00</span><br>
@@ -759,6 +848,7 @@
       </div>
       <div class="comparison-item">
         <span class="icon">📈</span>
+        <span class="rank-label rank-second">2nd – 162% Gain</span>
         <h3>S&amp;P 500 Index</h3>
         <p>
           <span class="year">2013:</span>
@@ -773,6 +863,7 @@
       </div>
       <div class="comparison-item">
         <span class="icon">🪙</span>
+        <span class="rank-label rank-third">3rd – 54% Gain</span>
         <h3>Gold</h3>
         <p>
           <span class="year">2013:</span>
@@ -1172,6 +1263,10 @@
                 });
                 if (bar) {
                   bar.style.width = progressTarget + "%";
+                }
+                if (item.classList.contains('top-performer')) {
+                  item.classList.add('flash');
+                  setTimeout(() => item.classList.remove('flash'), 600);
                 }
               }
             }
