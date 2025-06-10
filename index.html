@@ -583,6 +583,34 @@
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     }
 
+    .comparison-grid.podium {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 25px;
+      padding-bottom: 70px;
+    }
+
+    .comparison-grid.podium .comparison-item {
+      flex: 1;
+    }
+
+    .comparison-grid.podium .comparison-item::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: calc(-1 * var(--step-height, 0px));
+      height: var(--step-height, 0px);
+      background: #ddd;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+    }
+
+    .podium-first { order: 2; --step-height: 60px; transform: translateY(-60px); z-index: 3; }
+    .podium-second { order: 1; --step-height: 40px; transform: translateY(-40px); z-index: 2; }
+    .podium-third { order: 3; --step-height: 20px; transform: translateY(-20px); z-index: 1; }
+
     .comparison-item {
       position: relative;
       background: rgba(255,255,255,0.7);
@@ -828,8 +856,8 @@
 
   <section class="comparison" data-aos="fade-up">
     <h2>📈 10-Year Investment Growth Comparison</h2>
-    <div class="comparison-grid">
-      <div class="comparison-item top-performer">
+    <div class="comparison-grid podium">
+      <div class="comparison-item top-performer podium-first">
         <span class="icon">🔥</span>
         <span class="rank-label rank-first">1st – 6567% Gain</span>
         <span class="top-badge">💰 Highest Return</span>
@@ -846,7 +874,7 @@
           <div class="progress-bar" data-progress="90"></div>
         </div>
       </div>
-      <div class="comparison-item">
+      <div class="comparison-item podium-second">
         <span class="icon">📈</span>
         <span class="rank-label rank-second">2nd – 162% Gain</span>
         <h3>S&amp;P 500 Index</h3>
@@ -861,7 +889,7 @@
           <div class="progress-bar" data-progress="30"></div>
         </div>
       </div>
-      <div class="comparison-item">
+      <div class="comparison-item podium-third">
         <span class="icon">🪙</span>
         <span class="rank-label rank-third">3rd – 54% Gain</span>
         <h3>Gold</h3>
